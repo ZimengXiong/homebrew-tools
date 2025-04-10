@@ -1,13 +1,15 @@
 class Mm < Formula
   desc "A simple molecular weight calculator implemented in Rust"
-  homepage "https://github.com/zxzimeng/cli-molecular-weight-calculator"
+  homepage "https://github.com/zimengxiong/cli-molecular-weight-calculator"
   url "https://github.com/zxzimeng/cli-molecular-weight-calculator/releases/download/v0.1.1/v0.1.1.tar.gz"
-  sha256 "fe57541c6a263e4518e999024cd98cf016a9eb2b4dd559eea491c96868ea0dd3"
-  license "MIT"
-
-  depends_on "rust" => :build
+  sha256 "f7dc2967b904fc166094669e1d53deedcfd8b091b264d187d3f0213c64060d84"
 
   def install
-    system "cargo", "install", *std_cargo_args
+    bin.install "mm"
   end
+
+  test do
+    system "#{bin}/mm", "--help"
+  end
+
 end
