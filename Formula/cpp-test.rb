@@ -6,11 +6,11 @@ class CppTest < Formula
   license "MIT"
 
   def install
-    bin.install "cpp_test"
+    bin.install "cpp-test"
   end
 
   test do
-    system "#{bin}/cpp_test", "--help"
+    system "#{bin}/cpp-test", "--help"
   end
 end
 
