@@ -4,7 +4,7 @@ cask "namigen" do
   
   url "https://github.com/iamgeo92/mac-app/releases/download/#{version}/Namigen_#{version}_arm64.dmg"
   name "Namigen"
-  desc "Name generator app for macOS (Apple Silicon)"
+  desc "Fully Local AI Speech Generation"
   homepage "https://github.com/iamgeo92/mac-app"
 
   app "Namigen.app"
