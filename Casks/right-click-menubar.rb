@@ -9,6 +9,10 @@ cask "right-click-menubar" do
 
   app "Right Click Menubar.app"
 
+  postflight do
+    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/Right Click Menubar.app"]
+  end
+
   zap trash: [
     "~/Library/Application Support/Right Click Menubar",
     "~/Library/Preferences/com.zimengxiong.right-click-menubar.plist"
