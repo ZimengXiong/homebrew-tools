@@ -1,8 +1,8 @@
 cask "rightclickmenubar" do
-  version "0.1.0"
+  version "0.1.1"
   sha256 :no_check
 
-  url "https://github.com/ZimengXiong/right-click-menubar/releases/download/V0.1.0/RightClickMenubar.zip"
+  url "https://github.com/ZimengXiong/right-click-menubar/releases/download/V0.1.1/RightClickMenubar.zip"
   name "RightClickMenubar"
   desc "Access to the Application Menu in Context Menu at Cursor"
   homepage "https://github.com/ZimengXiong/right-click-menubar"
