@@ -1,6 +1,6 @@
 cask "spacecommand" do
   version "0.1.1"
-  sha256 "33f6755fe21e3c0f16f5f6598a73a15d3e4aab15b82348b31c23c3ca503c802a"
+  sha256 "29802e5ddfd90b194e8e5ef6c5acbbad0065451ae6d35674b6178cf78a8fe53e"
 
   url "https://github.com/ZimengXiong/SpaceCommand/releases/download/v#{version}/SpaceCommand.app.zip"
   name "SpaceCommand"
