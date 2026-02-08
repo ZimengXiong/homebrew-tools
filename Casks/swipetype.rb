@@ -1,6 +1,6 @@
 cask "swipetype" do
-  version "0.1.3"
-  sha256 "59b146b8637554d091f9132a50ecbfbf96930966397374be0d8938b641b2b50b"
+  version "0.1.4"
+  sha256 "3b340a016102879cf85e8585b7fb88caf9f1b819de62376c732503c80751990f"
 
   url "https://github.com/ZimengXiong/swipeType/releases/download/v#{version}/SwipeType.dmg"
   name "SwipeType"
