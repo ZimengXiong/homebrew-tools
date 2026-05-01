@@ -12,7 +12,9 @@ cask "aquarium" do
   app "Aquarium.app"
 
   postflight do
-    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/Aquarium.app"]
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Aquarium.app"],
+                   sudo: true
   end
 
   uninstall quit: "com.aquarium.app"
