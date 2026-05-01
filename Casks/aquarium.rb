@@ -1,6 +1,6 @@
 cask "aquarium" do
-  version "0.1.3"
-  sha256 "c2e41b75c05f4e449897e352d171ee3ebe9372480081eb6d7c52026bc8217b56"
+  version "0.1.4"
+  sha256 "55892033be3bbc23c273d5349f427218d16befbf259c5064f26666bb0d41103d"
 
   url "https://github.com/ZimengXiong/aquarium/releases/download/v#{version}/Aquarium-#{version}.zip"
   name "Aquarium"
