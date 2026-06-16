@@ -2,11 +2,7 @@ cask "tabbed" do
   version "0.1.1"
   sha256 "abcc9aaa8f0cabe120a2a49439a508b5c74754ad313e6a41ff6a96983909e9df"
 
-  url "https://api.github.com/repos/ZimengXiong/tabbed/releases/assets/448676567",
-      header: [
-        "Accept: application/octet-stream",
-        "Authorization: token #{ENV.fetch("HOMEBREW_GITHUB_API_TOKEN", "")}"
-      ]
+  url "https://github.com/ZimengXiong/tabbed/releases/download/v0.1.1/Tabbed.app.zip"
   name "Tabbed"
   desc "Command-drag macOS windows into lightweight tab stacks"
   homepage "https://github.com/ZimengXiong/tabbed"
