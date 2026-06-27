@@ -1,8 +1,8 @@
 cask "tabbed" do
-  version "0.1.1"
-  sha256 "abcc9aaa8f0cabe120a2a49439a508b5c74754ad313e6a41ff6a96983909e9df"
+  version "0.1.2"
+  sha256 "57b417f5bb2739be5e2865a3ef188cf60ec5119853b6f05a50b3a9ab0f2222b5"
 
-  url "https://github.com/ZimengXiong/tabbed/releases/download/v0.1.1/Tabbed.app.zip"
+  url "https://github.com/ZimengXiong/tabbed/releases/download/v0.1.2/Tabbed.app.zip"
   name "Tabbed"
   desc "Command-drag macOS windows into lightweight tab stacks"
   homepage "https://github.com/ZimengXiong/tabbed"
