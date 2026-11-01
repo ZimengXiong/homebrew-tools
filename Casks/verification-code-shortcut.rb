@@ -1,18 +1,18 @@
 require_relative "../lib/verification_code_shortcut_download_strategy"
 
 cask "verification-code-shortcut" do
-  version "0.1.5"
-  sha256 "e46e7b803fdf9394e1fb4ca092dd17b6e98f0d8cd982edf74b54a219d0ddfe16"
+  version "0.2.0"
+  sha256 "638a64fda5b61ecb8ce08517af211503920d567da94f240ead661832cc848b34"
 
   url "https://github.com/ZimengXiong/verification-code-shortcut/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip",
       using: VerificationCodeShortcutDownloadStrategy
-  name "Verification Code Shortcut"
+  name "Chromakey"
   homepage "https://github.com/ZimengXiong/verification-code-shortcut"
 
   depends_on macos: :sonoma
   depends_on formula: "gh"
 
-  app "Verification Code Shortcut.app", target: "#{Dir.home}/Applications/Verification Code Shortcut.app"
+  app "Chromakey.app", target: "#{Dir.home}/Applications/Chromakey.app"
 
   preflight_steps do
     run "/bin/launchctl", args: ["bootout", "gui/#{Process.uid}/local.zimeng.verification-code-shortcut"],
@@ -20,7 +20,7 @@ cask "verification-code-shortcut" do
   end
 
   postflight do
-    path = "#{Dir.home}/Applications/Verification Code Shortcut.app"
+    path = "#{Dir.home}/Applications/Chromakey.app"
     system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", path], must_succeed: false
     agent = Pathname("#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist")
     agent.dirname.mkpath
@@ -29,7 +29,7 @@ cask "verification-code-shortcut" do
       <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
       <plist version="1.0"><dict>
       <key>Label</key><string>local.zimeng.verification-code-shortcut</string>
-      <key>ProgramArguments</key><array><string>#{path}/Contents/MacOS/VerificationCodeShortcut</string></array>
+      <key>ProgramArguments</key><array><string>#{path}/Contents/MacOS/VerificationCodeShortcut</string><string>--background</string></array>
       <key>RunAtLoad</key><true/>
       <key>LimitLoadToSessionType</key><string>Aqua</string>
       <key>ProcessType</key><string>Interactive</string>
