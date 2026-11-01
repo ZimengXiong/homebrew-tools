@@ -1,16 +1,12 @@
-require_relative "../lib/verification_code_shortcut_download_strategy"
-
 cask "chromakey" do
-  version "0.2.7"
-  sha256 "a14dc51f50d48a42d40051048e1791843cb1be97a01a6766646fcce5e10ddd24"
+  version "0.2.9"
+  sha256 "3181198872e132e495bbc9223d4055f4f129ac179ee2c3d0a0401bcd255c7e7d"
 
-  url "https://github.com/ZimengXiong/verification-code-shortcut/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip",
-      using: VerificationCodeShortcutDownloadStrategy
+  url "https://github.com/ZimengXiong/chromakey/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip"
   name "Chromakey"
-  homepage "https://github.com/ZimengXiong/verification-code-shortcut"
+  homepage "https://github.com/ZimengXiong/chromakey"
 
   depends_on macos: :sonoma
-  depends_on formula: "gh"
 
   app "Chromakey.app", target: "#{Dir.home}/Applications/Chromakey.app"
 
