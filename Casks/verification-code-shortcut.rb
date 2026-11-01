@@ -1,8 +1,8 @@
 require_relative "../lib/verification_code_shortcut_download_strategy"
 
 cask "verification-code-shortcut" do
-  version "0.1.2"
-  sha256 "ff144cd49484e81a1e46e0a5393c68c1bb9ff5d1b60a3385fda70a8ba8d88d4c"
+  version "0.1.3"
+  sha256 "92b6f6b026404436160ab734c8181420c440c857426832b8f0e4c1f0d7fb769f"
 
   url "https://github.com/ZimengXiong/verification-code-shortcut/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip",
       using: VerificationCodeShortcutDownloadStrategy
@@ -38,6 +38,9 @@ cask "verification-code-shortcut" do
   end
 
   uninstall launchctl: "local.zimeng.verification-code-shortcut",
-            quit: "local.zimeng.verification-code-shortcut",
-            delete: "~/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist"
+            quit: "local.zimeng.verification-code-shortcut"
+
+  uninstall_postflight_steps do
+    remove "{{home}}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist"
+  end
 end
