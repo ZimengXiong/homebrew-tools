@@ -1,8 +1,8 @@
 require_relative "../lib/verification_code_shortcut_download_strategy"
 
 cask "verification-code-shortcut" do
-  version "0.2.0"
-  sha256 "638a64fda5b61ecb8ce08517af211503920d567da94f240ead661832cc848b34"
+  version "0.2.1"
+  sha256 "8bd601f09d915252c7188943144ca6841d1c00dde54162cac08dccee344531fe"
 
   url "https://github.com/ZimengXiong/verification-code-shortcut/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip",
       using: VerificationCodeShortcutDownloadStrategy
@@ -15,6 +15,7 @@ cask "verification-code-shortcut" do
   app "Chromakey.app", target: "#{Dir.home}/Applications/Chromakey.app"
 
   preflight_steps do
+    terminate_process "VerificationCodeShortcut", match: :name
     run "/bin/launchctl", args: ["bootout", "gui/#{Process.uid}/local.zimeng.verification-code-shortcut"],
         must_succeed: false, print_stderr: false
   end
@@ -39,8 +40,11 @@ cask "verification-code-shortcut" do
     system_command "/bin/launchctl", args: ["bootstrap", "gui/#{Process.uid}", agent.to_s]
   end
 
-  uninstall launchctl: "local.zimeng.verification-code-shortcut",
-            quit: "local.zimeng.verification-code-shortcut"
+  uninstall launchctl: "local.zimeng.verification-code-shortcut"
+
+  uninstall_preflight_steps do
+    terminate_process "VerificationCodeShortcut", match: :name
+  end
 
   uninstall_postflight_steps do
     remove "#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist"
