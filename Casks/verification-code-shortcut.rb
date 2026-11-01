@@ -1,8 +1,8 @@
 require_relative "../lib/verification_code_shortcut_download_strategy"
 
 cask "verification-code-shortcut" do
-  version "0.2.2"
-  sha256 "ee521aef1cb847814ff98a7a353fde54c760ca5a882eb622e565b3cbc872156d"
+  version "0.2.3"
+  sha256 "15f53e3c5772570cc0861b12990540c143462df0ca2fdd8c79f60790a14eaeee"
 
   url "https://github.com/ZimengXiong/verification-code-shortcut/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip",
       using: VerificationCodeShortcutDownloadStrategy
