@@ -1,8 +1,8 @@
 require_relative "../lib/verification_code_shortcut_download_strategy"
 
 cask "verification-code-shortcut" do
-  version "0.2.1"
-  sha256 "8bd601f09d915252c7188943144ca6841d1c00dde54162cac08dccee344531fe"
+  version "0.2.2"
+  sha256 "ee521aef1cb847814ff98a7a353fde54c760ca5a882eb622e565b3cbc872156d"
 
   url "https://github.com/ZimengXiong/verification-code-shortcut/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip",
       using: VerificationCodeShortcutDownloadStrategy
@@ -23,6 +23,7 @@ cask "verification-code-shortcut" do
   postflight do
     path = "#{Dir.home}/Applications/Chromakey.app"
     system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", path], must_succeed: false
+    system_command "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister", args: ["-f", path]
     agent = Pathname("#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist")
     agent.dirname.mkpath
     agent.write <<~PLIST
