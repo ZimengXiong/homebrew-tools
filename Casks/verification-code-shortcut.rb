@@ -1,8 +1,8 @@
 require_relative "../lib/verification_code_shortcut_download_strategy"
 
 cask "verification-code-shortcut" do
-  version "0.1.3"
-  sha256 "92b6f6b026404436160ab734c8181420c440c857426832b8f0e4c1f0d7fb769f"
+  version "0.1.4"
+  sha256 "67de0221793e23760f1392f779f8d39a0e6de37d70811a92992ab05e87972a5a"
 
   url "https://github.com/ZimengXiong/verification-code-shortcut/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip",
       using: VerificationCodeShortcutDownloadStrategy
@@ -20,10 +20,10 @@ cask "verification-code-shortcut" do
   end
 
   postflight_steps do
-    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{home}}/Applications/Verification Code Shortcut.app"],
-        writable_paths: ["{{home}}/Applications/Verification Code Shortcut.app"], must_succeed: false
-    mkdir_p "{{home}}/Library/LaunchAgents"
-    write_file "{{home}}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist", <<~PLIST
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{Dir.home}/Applications/Verification Code Shortcut.app"],
+        writable_paths: ["#{Dir.home}/Applications/Verification Code Shortcut.app"], must_succeed: false
+    mkdir_p "#{Dir.home}/Library/LaunchAgents"
+    write_file "#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist", <<~PLIST
       <?xml version="1.0" encoding="UTF-8"?>
       <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
       <plist version="1.0"><dict>
@@ -34,13 +34,13 @@ cask "verification-code-shortcut" do
       <key>ProcessType</key><string>Interactive</string>
       </dict></plist>
     PLIST
-    run "/bin/launchctl", args: ["bootstrap", "gui/#{Process.uid}", "{{home}}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist"]
+    run "/bin/launchctl", args: ["bootstrap", "gui/#{Process.uid}", "#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist"]
   end
 
   uninstall launchctl: "local.zimeng.verification-code-shortcut",
             quit: "local.zimeng.verification-code-shortcut"
 
   uninstall_postflight_steps do
-    remove "{{home}}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist"
+    remove "#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist"
   end
 end
