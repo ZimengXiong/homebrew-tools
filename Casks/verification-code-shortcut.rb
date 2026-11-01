@@ -1,8 +1,8 @@
 require_relative "../lib/verification_code_shortcut_download_strategy"
 
 cask "verification-code-shortcut" do
-  version "0.1.4"
-  sha256 "67de0221793e23760f1392f779f8d39a0e6de37d70811a92992ab05e87972a5a"
+  version "0.1.5"
+  sha256 "e46e7b803fdf9394e1fb4ca092dd17b6e98f0d8cd982edf74b54a219d0ddfe16"
 
   url "https://github.com/ZimengXiong/verification-code-shortcut/releases/download/v#{version}/VerificationCodeShortcut-#{version}.zip",
       using: VerificationCodeShortcutDownloadStrategy
@@ -19,22 +19,24 @@ cask "verification-code-shortcut" do
         must_succeed: false, print_stderr: false
   end
 
-  postflight_steps do
-    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{Dir.home}/Applications/Verification Code Shortcut.app"],
-        writable_paths: ["#{Dir.home}/Applications/Verification Code Shortcut.app"], must_succeed: false
-    mkdir_p "#{Dir.home}/Library/LaunchAgents"
-    write_file "#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist", <<~PLIST
+  postflight do
+    path = "#{Dir.home}/Applications/Verification Code Shortcut.app"
+    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", path], must_succeed: false
+    agent = Pathname("#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist")
+    agent.dirname.mkpath
+    agent.write <<~PLIST
       <?xml version="1.0" encoding="UTF-8"?>
       <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
       <plist version="1.0"><dict>
       <key>Label</key><string>local.zimeng.verification-code-shortcut</string>
-      <key>ProgramArguments</key><array><string>#{Dir.home}/Applications/Verification Code Shortcut.app/Contents/MacOS/VerificationCodeShortcut</string></array>
+      <key>ProgramArguments</key><array><string>#{path}/Contents/MacOS/VerificationCodeShortcut</string></array>
       <key>RunAtLoad</key><true/>
       <key>LimitLoadToSessionType</key><string>Aqua</string>
       <key>ProcessType</key><string>Interactive</string>
       </dict></plist>
     PLIST
-    run "/bin/launchctl", args: ["bootstrap", "gui/#{Process.uid}", "#{Dir.home}/Library/LaunchAgents/local.zimeng.verification-code-shortcut.plist"]
+    system_command "/bin/launchctl", args: ["bootout", "gui/#{Process.uid}/local.zimeng.verification-code-shortcut"], must_succeed: false, print_stderr: false
+    system_command "/bin/launchctl", args: ["bootstrap", "gui/#{Process.uid}", agent.to_s]
   end
 
   uninstall launchctl: "local.zimeng.verification-code-shortcut",
